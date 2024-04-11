@@ -1,5 +1,8 @@
 package n1.ex3.common;
 
+import n1.ex3.adapter.out.CountriesRepository;
+import n1.ex3.application.domain.port.out.CountriesReader;
+
 /**
  *
  * Donat el fitxer countrties.txt (revisa l'apartat recursos) que conté països i capitals.
@@ -12,7 +15,17 @@ package n1.ex3.common;
  */
 
 public class App {
-    public static void run() {
+
+    static private final CountriesReader reader;
+
+    static {
+        reader = new CountriesRepository(); // Poor imitation of dependency injection
+    }
+
+    public static void run(){
+
+        System.out.println(reader.getCountries().toString());
 
     }
+
 }
