@@ -15,7 +15,7 @@ public class CountriesRepository implements CountriesReader {
         var countryCapitalMap = new HashMap<String, String>(); // Structure to return
         try {
 
-            var reader = new BufferedReader(new FileReader("C:\\Users\\formacio\\Desktop\\Tasca-S5.01-Spring-boot-API-rest-Aplicaci-web-main\\JavaCore\\countries.txt"));
+            var reader = new BufferedReader(new FileReader("/home/miguel/IdeaProjects/JavaCore/countries.txt"));
 
             var nextLine = reader.readLine();
             while (nextLine != null && !nextLine.isBlank()){ // This doesn't take into account a possible blank string in the middle of the file. Only the last one
