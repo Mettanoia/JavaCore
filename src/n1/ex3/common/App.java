@@ -1,13 +1,10 @@
 package n1.ex3.common;
 
 import application.adapter.out.ResultsRepository;
-import application.domain.port.out.ResultsWriter;
 import n1.ex3.adapter.out.CountriesRepository;
 import n1.ex3.application.domain.port.out.CountriesReader;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * Donat el fitxer countrties.txt (revisa l'apartat recursos) que conté països i capitals.
@@ -28,9 +25,12 @@ public class App {
 
     public static void run() {
 
-        HashMap<String, String> countriesToCapitals = reader.getCountries();
+        Optional<HashMap<String, String>> countriesToCapitals = reader.getCountries();
 
-        List<String> keys = new ArrayList<>(countriesToCapitals.keySet());
+        if (countriesToCapitals.isEmpty())
+            throw new RuntimeException("Couldn't load the file. Fail fast."); // I know this can be done better specially exploiting the Optional functional pattern but I don't think it worths it here
+
+        List<String> keys = new ArrayList<>(countriesToCapitals.get().keySet());
 
         var randomKeys = new HashSet<String>();
 
@@ -44,7 +44,7 @@ public class App {
         for (var country : randomKeys) {
 
             System.out.println(country);
-            results.add(scanner.nextLine().equalsIgnoreCase(countriesToCapitals.get(country)));
+            results.add(scanner.nextLine().equalsIgnoreCase(countriesToCapitals.get().get(country)));
 
         }
 

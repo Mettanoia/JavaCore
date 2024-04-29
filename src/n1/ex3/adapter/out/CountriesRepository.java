@@ -6,12 +6,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class CountriesRepository implements CountriesReader {
 
     @Override
-    public HashMap<String, String> getCountries() {
+    public Optional<HashMap<String, String>> getCountries() {
 
+        Optional<HashMap<String, String>> result;
         var countryCapitalMap = new HashMap<String, String>(); // Structure to return
         try {
 
@@ -27,11 +29,13 @@ public class CountriesRepository implements CountriesReader {
 
             }
 
+            result = Optional.of(countryCapitalMap);
+
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage()); // Impossible to recover from this error.
+            result = Optional.empty();
         }
 
-        return countryCapitalMap;
+        return result;
 
     }
 
