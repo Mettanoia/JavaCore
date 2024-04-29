@@ -6,9 +6,7 @@ import java.util.List;
 /**
  *
  * Crea i emplena un List<Integer>.
- *
  * Crea un segon List<Integer> i insereix a la segona llista els elements de la primera en ordre invers.
- *
  * Empra els objectes ListIterator per a llegir els elements de la primera llista i inserir-los en la segona.
  *
  */
@@ -16,7 +14,7 @@ import java.util.List;
 public class App {
     public static void run(){
 
-        var ints = new ArrayList<Integer>(){{
+        List<Integer> ints = new ArrayList<>(){{
             add(1);
             add(2);
             add(3);
@@ -29,7 +27,7 @@ public class App {
             add(10);
         }};
 
-        var moreInts = new ArrayList<Integer>(){{
+        List<Integer> moreInts = new ArrayList<>(){{
             add(11);
             add(12);
             add(13);
@@ -42,11 +40,9 @@ public class App {
             add(20);
         }};
 
-        for (var i = ints.reversed().iterator(); i.hasNext();){
-            moreInts.add(i.next());
-        }
+        moreInts.addAll(ints.reversed());
 
-        System.out.println(moreInts.toString());
+        System.out.println(moreInts);
 
     }
 }

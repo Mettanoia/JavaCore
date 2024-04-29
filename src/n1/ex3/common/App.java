@@ -25,17 +25,17 @@ public class App {
 
     public static void run() {
 
-        Optional<HashMap<String, String>> countriesToCapitals = reader.getCountries();
+        Optional<Map<String, String>> countriesToCapitals = reader.getCountries();
 
         if (countriesToCapitals.isEmpty())
             throw new RuntimeException("Couldn't load the file. Fail fast."); // I know this can be done better specially exploiting the Optional functional pattern but I don't think it worths it here
 
         List<String> keys = new ArrayList<>(countriesToCapitals.get().keySet());
 
-        var randomKeys = new HashSet<String>();
+        Set<String> randomKeys = new HashSet<>();
 
         while (randomKeys.size() < 10) {
-            var randomIndex = new java.util.Random().nextInt(keys.size());
+            int randomIndex = new java.util.Random().nextInt(keys.size());
             randomKeys.add(keys.get(randomIndex));
         }
 
@@ -49,8 +49,8 @@ public class App {
         }
 
         System.out.println("We finished! Please introduce your name to write your results:");
-        var name = scanner.nextLine();
-        var total = results.stream().mapToInt(x -> x ? 1 : 0).sum();
+        String name = scanner.nextLine();
+        int total = results.stream().mapToInt(x -> x ? 1 : 0).sum();
 
         new ResultsRepository().writeResults(name, total);
 
